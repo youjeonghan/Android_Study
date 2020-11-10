@@ -33,6 +33,6 @@ fun main(args:Array<String>){
     println(point)
     println(fix)
 
-    fix = 500
+//    fix = 100     //오류남
 
 }
