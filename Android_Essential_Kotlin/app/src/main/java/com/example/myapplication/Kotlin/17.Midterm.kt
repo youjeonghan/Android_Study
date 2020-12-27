@@ -42,7 +42,8 @@ fun question3(num: Int): Int {
 fun question4() {
     for (i in 1 until 10){
         for (j in 1 until 10){
-            println(""+ i + " * " + j +" = " + (i*j))
+//            println(""+ i + " * " + j +" = " + (i*j))
+            println("$i * $j = ${i*j}")
         }
         println()
     }
