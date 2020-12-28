@@ -42,6 +42,11 @@ fun main(array: Array<String>) {
     val runnableCar2: RunnableCar2 = RunnableCar2("nice engine", "long body")
     println(runnableCar2.engine)
     println(runnableCar2.body)
+    println()
+
+    val testClass = TestClass()
+    testClass.test(1)
+    testClass.test(1,2)
 }
 
 // 클래스(설명서) 만드는 방법(1)
@@ -118,7 +123,7 @@ class RunnableCar2 {
     }
 
 
-    init{
+    init {
         // 인스턴스화 될때 먼저 호출되는 부분 init
         // 초기셋팅을 할때 유용하다
         println("RunnableCar2가 만들어 졌습니다")
@@ -134,5 +139,18 @@ class RunnableCar2 {
 
     fun navi(destination: String) {
         println("${destination}으로 목적지가 설정되었습니다.")
+    }
+}
+
+// 오버로딩
+// -> 이름이 같지만 받는 파라미터가 다른 함수
+class TestClass() {
+
+    fun test(a: Int) {
+        println("up")
+    }
+
+    fun test(a: Int, b: Int) {
+        println("down")
     }
 }
