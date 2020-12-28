@@ -5,9 +5,9 @@ package com.example.myapplication.Kotlin
 // 1. 전역 변수
 // 2. 지역 변수
 
-var number100: Int=10
+var number100: Int = 10
 
-fun main(args:Array<String>){
+fun main(args: Array<String>) {
     println(number100)
 
     val test = Test("홍길동")
@@ -16,8 +16,9 @@ fun main(args:Array<String>){
     println(number100)
 }
 
-class Test(var name:String){
-    fun testFun(){
+class Test(var name: String) {
+    fun testFun() {
+        var birth:String = "1996/07/11"
         name = "홍길동"
         number100 = 100
     }
