@@ -8,41 +8,47 @@ package com.example.myapplication.Kotlin
 
 
 fun main(array: Array<String>) {
-    val night = Night(20, 4)
-    val monster = Monster(15, 5)
+    val night = SuperNight(100, 10)
+    val monster = SuperMonster(100, 15)     // SuperMonster도 Monster이다
     night.attack(monster)
+    println()
+
     monster.attack(night)
 }
 
-class Night(private var hp: Int, private var power: Int) {
+// 상속이 만들어낸 특징
+// - 자식 클래스는 부모 클래스의 타입이다
+// - 부모 클래스는 자식 크래스의 타입이 아니다!
 
-    fun attack(monster: Monster) {
-        monster.defense(power)
+
+class SuperNight(hp: Int, power: Int) : Night(hp, power) {
+    override fun attack(monster: Monster) {
+        super.attack(monster)
+        super.attack(monster)
+        println("${javaClass.simpleName}가 공격을 마쳤습니다.")
     }
 
-    fun defense(damage: Int) {
-        hp -= damage
-        if (hp > 0) {
-            heal()
-            println("기사 현재 체력은 $hp 입니다")
-        } else println("기사가 죽었습니다")
-    }
-
-    private fun heal() {
-        // 아무때나 사용하는게 아니라
-        // 공격 당하고 살아있을시에만 발동
-        hp += 3
+    override fun defense(damage: Int) {
+        if (damage > 2) {
+            super.defense(damage - 1)
+        } else {
+            super.defense(damage)
+        }
     }
 }
 
-class Monster(private var hp: Int, private var power: Int) {
-    fun attack(night: Night) {
-        night.defense(power)
-    }
+class SuperMonster(hp: Int, power: Int) : Monster(hp, power) {
+    override fun attack(night: Night) {
+            super.attack(night)
+            super.attack(night)
+        println("${javaClass.simpleName}가 공격을 마쳤습니다.")
+        }
 
-    fun defense(damage: Int) {
-        hp -= damage
-        if (hp > 0) println("몬스터 현재 체력은 $hp 입니다")
-        else println("몬스터가 죽었습니다")
-    }
+        override fun defense(damage: Int) {
+            if (damage > 2) {
+                super.defense(damage - 1)
+            } else {
+                super.defense(damage)
+            }
+        }
 }
