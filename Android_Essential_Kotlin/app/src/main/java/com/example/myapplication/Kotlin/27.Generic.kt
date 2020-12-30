@@ -27,5 +27,5 @@ fun main(args: Array<String>) {
     // 부모 : Any
     // 자식 : String, Int, Float
 
-    
+
 }
