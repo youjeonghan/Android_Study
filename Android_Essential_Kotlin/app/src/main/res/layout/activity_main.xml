@@ -8,20 +8,17 @@
     tools:context=".MainActivity">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="안녕하세요 "
-        android:textSize="20dp"
-
-        android:textColor="@color/design_default_color_error" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="#7B8AE1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="안녕히계세요">
-
-    </TextView>
+        android:background="#E44141"
+        android:text="안녕하세요"
+        android:textSize="60dp" />
 
 
 </LinearLayout>
