@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- 아이디 다매겨서 풀기 -->
+
+    <TextView
+        android:id="@+id/view1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:background="#F44336" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@id/view1"
+        android:layout_toLeftOf="@id/view1"
+        android:background="#4CAF50" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@id/view1"
+        android:layout_centerInParent="true"
+        android:background="#9C27B0" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toRightOf="@id/view1"
+        android:layout_above="@id/view1"
+        android:background="#E91E63" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toLeftOf="@id/view1"
+        android:layout_centerVertical="true"
+        android:background="#009688" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toRightOf="@id/view1"
+        android:layout_centerVertical="true"
+        android:background="#8BC34A" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toLeftOf="@id/view1"
+        android:layout_below="@id/view1"
+        android:background="#FFC107" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/view1"
+        android:layout_centerHorizontal="true"
+        android:background="#00BCD4" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toRightOf="@id/view1"
+        android:layout_below="@id/view1"
+        android:background="#E91E63" />
+
+
+</RelativeLayout>
