@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    // 뷰바인딩을 위해 내가 추가한 부분
+    buildFeatures { viewBinding true }
+
 }
 
 dependencies {
