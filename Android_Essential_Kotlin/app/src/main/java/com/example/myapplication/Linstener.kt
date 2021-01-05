@@ -9,6 +9,8 @@ import com.example.myapplication.databinding.ActivityListenerBinding
 
 class Linstener : AppCompatActivity() {
 
+    var number = 10
+
     // 2번 방법 대신 뷰바인딩을 사용하는게 정석이라고함 (1),(2),(3) 참조
     // 액티비티에서 사용할 레이아웃의 뷰 바인딩 클래스 (1)
     private lateinit var binding: ActivityListenerBinding
@@ -37,20 +39,30 @@ class Linstener : AppCompatActivity() {
         }
 
         // 2 -> 익명 함수 방식 (특별히 이름이 없음ㅎㅎ)
-        binding.hello.setOnClickListener(object : View.OnClickListener{
+        binding.hello.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 Log.d("click", "Click!!")
             }
         })
 
         // 3 -> 이름이 필요한 경우 (이름:click / 다른이름이여도 상관없음)
-        val click = object: View.OnClickListener{
+        val click = object : View.OnClickListener {
             override fun onClick(v: View?) {
-                TODO("Not yet implemented")
+                Log.d("click", "Click!!")
+                binding.hello.setText("안녕하세요")
+                binding.image.setImageResource(R.drawable.people)
+                number += 10
+                Log.d("number", number.toString())
             }
         }
 
         binding.hello.setOnClickListener(click)
+
+
+        // 뷰를 조작 하는 함수들
+        // 1 -> setText
+        // 2 -> setImage
+        // 3 ->
 
 
     }
