@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Intent2"
-    android:background="#2196F3">
+    android:background="#2196F3"
+    tools:context=".Intent2">
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/result"
+        android:text="결과"/>
 
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.myapplication.databinding.ActivityIntent1Binding
 
 class Intent1 : AppCompatActivity() {
@@ -27,11 +28,22 @@ class Intent1 : AppCompatActivity() {
             val intent2 = Intent(this@Intent1, Intent2::class.java)
             // Apply -> 사용하면 유지보수 및 실수가 준다
             intent2.apply {
-                this.putExtra("nummber1", 1)
-                this.putExtra("nummber2", 2)
+                this.putExtra("number1", 1)
+                this.putExtra("number2", 2)
             }
-            startActivity(intent2)
+            startActivityForResult(intent2, 200)
         }
 
+    }
+
+    // 응답 값을 받기 위한 오버라이딩
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 200) {
+            Log.d("number", "" + requestCode)
+            Log.d("number", "" + resultCode)
+            val result = data?.getIntExtra("result", 0)
+            Log.d("result", ""+result)
+        }
     }
 }
