@@ -7,7 +7,7 @@ import com.example.myapplication.databinding.ActivityIntent1Binding
 
 class Intent1 : AppCompatActivity() {
 
-    private lateinit var  binding: ActivityIntent1Binding
+    private lateinit var binding: ActivityIntent1Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +18,19 @@ class Intent1 : AppCompatActivity() {
 
         binding.changeActivity.setOnClickListener {
             val intent = Intent(this@Intent1, Intent2::class.java)
-            startActivity(intent)
+
+//            // Key, Value 방식 -> Key와 value를 쌍으로 만들어 저장한다.
+//            intent.putExtra("number1", 1)
+//            intent.putExtra("number2", 2)
+//            startActivity(intent)
+
+            val intent2 = Intent(this@Intent1, Intent2::class.java)
+            // Apply -> 사용하면 유지보수 및 실수가 준다
+            intent2.apply {
+                this.putExtra("nummber1", 1)
+                this.putExtra("nummber2", 2)
+            }
+            startActivity(intent2)
         }
 
     }
