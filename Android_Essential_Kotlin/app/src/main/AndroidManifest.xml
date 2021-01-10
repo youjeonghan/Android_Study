@@ -9,15 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".Intent2"></activity>
-        <activity android:name=".Intent1">
+        <activity android:name=".OpenInternet">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".Calculator"></activity>
+        <activity android:name=".Intent2" />
+        <activity android:name=".Intent1"></activity>
+        <activity android:name=".Calculator" />
         <activity android:name=".Linstener" />
         <activity android:name=".MainActivity" />
     </application>
