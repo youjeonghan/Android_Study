@@ -13,12 +13,12 @@
         android:text="안녕하세요"
         android:textSize="50dp" />
 
-    <fragment
-        android:id="@+id/fragment_one"
-        android:name="com.example.myapplication.FragmentOne"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        />
+<!--    <fragment-->
+<!--        android:id="@+id/fragment_one"-->
+<!--        android:name="com.example.myapplication.FragmentOne"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        />-->
 
     <Button
         android:id="@+id/button"

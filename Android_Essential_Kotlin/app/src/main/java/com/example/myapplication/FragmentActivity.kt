@@ -6,7 +6,12 @@ import android.util.Log
 import androidx.fragment.app.FragmentManager
 import com.example.myapplication.databinding.ActivityFragmentBinding
 
-class FragmentActivity : AppCompatActivity() {
+class FragmentActivity : AppCompatActivity(), FragmentOne.OnDataPassListener {
+
+
+    override fun onDataPass(data: String?) {
+        Log.d("pass", "" + data)
+    }
 
     private lateinit var binding: ActivityFragmentBinding
 
@@ -36,10 +41,10 @@ class FragmentActivity : AppCompatActivity() {
             // 끝을 내는 방법
             // commit    -> 시간 될때 해 (좀더 안정적)
             // commitnow -> 지금 당장해
-            
+
         }
 
-        binding.button2.setOnClickListener{
+        binding.button2.setOnClickListener {
             // 프라그먼트 remove/detach 하는 방법 (다름)
             // remove는 다시 붙일 수 있음
             // detach는 다시 붙이는건 안됨
