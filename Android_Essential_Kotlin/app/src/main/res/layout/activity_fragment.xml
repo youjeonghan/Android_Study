@@ -18,7 +18,6 @@
         android:name="com.example.myapplication.FragmentOne"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-
         />
 
     <Button
@@ -26,6 +25,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="나와라!!" />
+
+    <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사라져!!" />
 
     <LinearLayout
         android:id="@+id/container"

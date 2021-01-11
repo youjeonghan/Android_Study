@@ -17,9 +17,15 @@ class FragmentActivity : AppCompatActivity() {
         binding = ActivityFragmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val fragmentOne: FragmentOne = FragmentOne()
+        // 프라그먼트에 data를 넣어주는 방법
+        val bundle: Bundle = Bundle()
+        bundle.putString("hello", "hello")
+        fragmentOne.arguments = bundle
+
         binding.button.setOnClickListener {
             // 프라그먼트를 동적으로 작동하는 방법
-            val fragmentOne: FragmentOne = FragmentOne()
+            // 프라그먼트 붙이는 방법 replace/add (거의 동일)
             val fragmentManager: FragmentManager = supportFragmentManager
 
             // Transaction
@@ -32,6 +38,17 @@ class FragmentActivity : AppCompatActivity() {
             // commitnow -> 지금 당장해
             
         }
+
+        binding.button2.setOnClickListener{
+            // 프라그먼트 remove/detach 하는 방법 (다름)
+            // remove는 다시 붙일 수 있음
+            // detach는 다시 붙이는건 안됨
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.detach(fragmentOne)
+            fragmentTransaction.commit()
+        }
+
     }
 
     override fun onStart() {
