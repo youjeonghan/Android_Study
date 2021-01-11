@@ -9,8 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".Resource">
-
+        <activity android:name=".Context">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,9 +17,10 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".NullSafety">
+        <activity android:name=".Resource">
 
         </activity>
+        <activity android:name=".NullSafety"></activity>
         <activity android:name=".FragmentActivity" />
         <activity android:name=".OpenInternet" />
         <activity android:name=".Intent2" />
