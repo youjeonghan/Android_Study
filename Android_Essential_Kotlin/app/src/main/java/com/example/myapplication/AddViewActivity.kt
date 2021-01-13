@@ -26,14 +26,20 @@ class AddViewActivity : AppCompatActivity() {
         val container = binding.addviewContainer
         val inflater = LayoutInflater.from(this)
         for (i in 0 until carList.size) {
-            val itemView = inflater.inflate(R.layout.item_view, null)
-            val carNameView = itemView.findViewById<TextView>(R.id.car_name)
-            val carEngineView = itemView.findViewById<TextView>(R.id.car_engine)
+//            val itemView = inflater.inflate(R.layout.item_view, null)
+//            val carNameView = itemView.findViewById<TextView>(R.id.car_name)
+//            val carEngineView = itemView.findViewById<TextView>(R.id.car_engine)
+            // 위방식 사용시 아래에서 container.addView(itemView.root)
+
+            val itemView = ItemViewBinding.inflate(layoutInflater)
+            val carNameView = itemView.carName
+            val carEngineView = itemView.carEngine
+
 
             carNameView.setText(carList.get(i).name)
             carEngineView.setText(carList.get(i).engine)
             Log.d("cnt", i.toString())
-            container.addView(itemView)
+            container.addView(itemView.root)
         }
     }
 }
