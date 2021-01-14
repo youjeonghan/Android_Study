@@ -8,7 +8,7 @@ RecyclerView
         - ViewHolder 포함
 
     - 유연하다
-        - LayoutManager
+        - LayoutManager를 관리할 수 있어서 유연하다
             - Linear
             - Glide
             - StaggeredGrid
