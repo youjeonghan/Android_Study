@@ -2,10 +2,12 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.example.myapplication.databinding.ActivityListViewBinding
@@ -20,7 +22,7 @@ class ListViewActivity : AppCompatActivity() {
 
         // 아이템 리스트 준비
         val carList = ArrayList<CarForList>()
-        for (i in 0 until 10) {
+        for (i in 0 until 30) {
             carList.add(CarForList("" + i + "번째 자동차", "" + i + "순위 엔진"))
         }
 
@@ -30,7 +32,8 @@ class ListViewActivity : AppCompatActivity() {
             val carName = (adapter.getItem(position) as CarForList).name
             val carEngine = (adapter.getItem(position) as CarForList).engine
 
-            Toast.makeText(this@ListViewActivity, carName + " " + carEngine, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@ListViewActivity, carName + " " + carEngine, Toast.LENGTH_SHORT)
+                .show()
 
         }
 
@@ -94,8 +97,9 @@ class ListViewActivity : AppCompatActivity() {
 //    }
 //}
 
-// ViewHolder 사용 버전
- class ListViewAdapter(val carForList: ArrayList<CarForList>, val layoutInflater: LayoutInflater) : BaseAdapter() {
+// ViewHolder 사용 버전 (바인딩 버전)
+class ListViewAdapter(val carForList: ArrayList<CarForList>, val layoutInflater: LayoutInflater) :
+    BaseAdapter() {
     override fun getCount(): Int {
         // 그리고자 하는 아이템 리스트의 전체 갯수
         return carForList.size
@@ -112,12 +116,33 @@ class ListViewActivity : AppCompatActivity() {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        val view = layoutInflater.inflate(R.layout.item_view, null)
-        val carNameTextview = view.findViewById<TextView>(R.id.car_name)
-        val carEngineTextview = view.findViewById<TextView>(R.id.car_engine)
 
-        carNameTextview.setText(carForList[position].name)
-        carEngineTextview.setText(carForList[position].engine)
+        val view: View
+        val holder: ViewHolder
+
+        if (convertView == null) {
+            Log.d("convert", "1")
+            val view_binding = ItemViewBinding.inflate(layoutInflater)
+            view = view_binding.root
+
+            holder = ViewHolder()
+            holder.carName = view_binding.carName
+            holder.carEngine = view_binding.carEngine
+
+            view.tag = holder
+        } else {
+            Log.d("convert", "2")
+            holder = convertView.tag as ViewHolder
+            view = convertView
+        }
+        holder.carName?.setText(carForList.get(position).name)
+        holder.carEngine?.setText(carForList.get(position).engine)
+
         return view
     }
+}
+
+class ViewHolder {
+    var carName: TextView? = null
+    var carEngine: TextView? = null
 }
