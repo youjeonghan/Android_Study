@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ActivityRecyclerViewBinding
@@ -67,3 +65,8 @@ class RecyclerViewAdapter(
         return itemList.size
     }
 }
+// RecyclerView의 작동 과정
+// onCreateViewHolder 함수에서 activity의 리사이클뷰에 들어갈 공간을 만든다.
+// -> 이렇게 만들어진 공간을 ViewHolder에서 받는다 (해당 코드는 뷰를 받지만 뷰바인딩, 데이터 바인딩을 받아서 작동하게 만들 수도 있다.)
+// -> ViewHolder에서는 이 공간에 들어갈 sub_item(.xml)의 정보를 불러와서 저장한다(골격을 잡는다)
+// -> onBindViewHolder 함수에서 이 공간에 데이터를 담는다
