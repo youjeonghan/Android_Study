@@ -26,6 +26,8 @@ class RecyclerViewActivity : AppCompatActivity() {
 
         val adapter = RecyclerViewAdapter(carList, LayoutInflater.from(this@RecyclerViewActivity))
         binding.recyclerView.adapter = adapter
+
+        // layoutManager: 아이템의 항목을 배치
         binding.recyclerView.layoutManager = LinearLayoutManager(this@RecyclerViewActivity)
 //        binding.recyclerView.layoutManager = GridLayoutManager(this@RecyclerViewActivity, 2)
     }
@@ -36,6 +38,7 @@ class RecyclerViewAdapter(
     val inflater: LayoutInflater
 ) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val carName: TextView
         val carEngine: TextView
@@ -43,6 +46,7 @@ class RecyclerViewAdapter(
         init {
             carName = itemView.findViewById(R.id.car_name)
             carEngine = itemView.findViewById(R.id.car_engine)
+            Log.d("포지션", ""+ adapterPosition)
             itemView.setOnClickListener {
                 val position:Int = adapterPosition
                 val engineName = itemList.get(position).engine
@@ -56,6 +60,7 @@ class RecyclerViewAdapter(
         return ViewHolder(view)
     }
 
+    // 재활용되는 뷰가 호출하여 실행되는 메소드로 뷰 홀더를 전달하고 어댑터는 poition 의 데이터를 결합
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.carName.setText(itemList.get(position).name)
         holder.carEngine.setText(itemList.get(position).engine)

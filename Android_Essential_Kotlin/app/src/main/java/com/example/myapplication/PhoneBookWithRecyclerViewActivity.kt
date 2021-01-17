@@ -1,15 +1,20 @@
 package com.example.myapplication
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ActivityPhoneBookWithRecyclerViewBinding
 import com.example.myapplication.databinding.PhonebookItemBinding
+import java.security.AccessController.getContext
 
 class PhoneBookWithRecyclerViewActivity : AppCompatActivity() {
 
@@ -20,14 +25,17 @@ class PhoneBookWithRecyclerViewActivity : AppCompatActivity() {
         binding = ActivityPhoneBookWithRecyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val phone_book1 = createFakePhoneBook()
 
-        val adapter = PhoneBookRecyclerAdapter(
-            phone_book1,
-            LayoutInflater.from(this@PhoneBookWithRecyclerViewActivity)
-        )
-        binding.phonebookRecyclerView.adapter = adapter
-        binding.phonebookRecyclerView.layoutManager = LinearLayoutManager(this@PhoneBookWithRecyclerViewActivity)
+
+        with(binding.phonebookRecyclerView) {
+            this.adapter = PhoneBookRecyclerAdapter(
+                itemList = createFakePhoneBook(),
+                activity = this@PhoneBookWithRecyclerViewActivity
+            )
+            this.layoutManager =
+                LinearLayoutManager(this@PhoneBookWithRecyclerViewActivity)
+        }
+
 
     }
 
@@ -46,19 +54,39 @@ class PhoneBookWithRecyclerViewActivity : AppCompatActivity() {
 
 class PhoneBookRecyclerAdapter(
     val itemList: PhoneBook1,
-    val inflater: LayoutInflater
+    val activity: Activity
+//    val inflater: LayoutInflater
 ) : RecyclerView.Adapter<PhoneBookRecyclerAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val itemView_binding: PhonebookItemBinding) :
+    inner class ViewHolder(itemView_binding: PhonebookItemBinding) :
         RecyclerView.ViewHolder(itemView_binding.root) {
         val personName: TextView
 
+
         init {
             personName = itemView_binding.personName
-            itemView_binding.root.setOnClickListener {
-                val position: Int = adapterPosition
-                val name = itemList.personList[position].name
-                Log.d("name", name)
+            addSetOnClickListener(
+                itemList,
+                itemView_binding.root,
+                activity
+            )
+//            itemView_binding.root.setOnClickListener {
+//                val position: Int = adapterPosition
+//                val name = itemList.personList[position].name
+//                Log.d("name", name)
+//            }
+        }
+
+        // 리스너 장착 함수
+        fun addSetOnClickListener(itemList: PhoneBook1, view: View, activity: Activity) {
+            Log.d("리스너 장착함수", " 리스너 장착함수")
+            view.setOnClickListener {
+                val intent = Intent(activity, PhoneBookDetailActivity::class.java)
+                intent.putExtra("name", itemList.personList[adapterPosition].name)
+                intent.putExtra("number", itemList.personList[adapterPosition].number)
+                // 해당 라인에서는 startActivity() 실행 안됨 (AppCompatActivity()를 상속 받지 않기 때문 / AppCompatActivity()가 가지고있는 기능임)
+                // class에서 반은 인자인 activity 안에 기능이 상속 받아져있다
+                activity.startActivity(intent)
             }
         }
     }
