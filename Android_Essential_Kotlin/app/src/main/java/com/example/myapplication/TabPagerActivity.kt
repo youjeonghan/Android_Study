@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.myapplication.databinding.ActivityTabPagerBinding
+import com.google.android.material.tabs.TabLayout
 
 class TabPagerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTabPagerBinding
@@ -17,6 +18,27 @@ class TabPagerActivity : AppCompatActivity() {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("ONE"))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("TWO"))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("THREE"))
+
+        val pagerAdapter = PagerAdapter(supportFragmentManager, 3)
+        binding.viewPager.adapter = pagerAdapter
+
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+            // Tab이 선택됬을때 Pager를 해당 칸으로 이동
+                binding.viewPager.currentItem = tab!!.position
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
+        // -> Pager 이동에 따라서 Tab을 이동하게 하는 코드
+        binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout))
+
     }
 }
 

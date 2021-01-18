@@ -24,7 +24,7 @@ class Fragment3 : Fragment() {
 //        _binding = FragementOneBinding.inflate(inflater, container, false)
 //        return binding.root
 
-        return inflater.inflate(R.layout.fragement_one, container, false)
+        return inflater.inflate(R.layout.fragement_three, container, false)
     }
 
 
