@@ -19,7 +19,7 @@ class TabPagerActivity : AppCompatActivity() {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("TWO"))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("THREE"))
 
-        val pagerAdapter = PagerAdapter(supportFragmentManager, 3)
+        val pagerAdapter = FragmentPagerAdapter(supportFragmentManager, 3)
         binding.viewPager.adapter = pagerAdapter
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
@@ -27,13 +27,9 @@ class TabPagerActivity : AppCompatActivity() {
             // Tab이 선택됬을때 Pager를 해당 칸으로 이동
                 binding.viewPager.currentItem = tab!!.position
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-
             }
-
             override fun onTabReselected(tab: TabLayout.Tab?) {
-
             }
         })
         // -> Pager 이동에 따라서 Tab을 이동하게 하는 코드
@@ -43,7 +39,7 @@ class TabPagerActivity : AppCompatActivity() {
 }
 
 
-class PagerAdapter(
+class FragmentPagerAdapter(
     fragmentManager: FragmentManager,
     val tabCount: Int
 ) : FragmentStatePagerAdapter(fragmentManager) {
