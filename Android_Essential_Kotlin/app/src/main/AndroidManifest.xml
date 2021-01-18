@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity android:name=".PhoneBookWithRecyclerViewActivity">
+        <activity android:name=".TabPagerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,10 +19,11 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".RecyclerViewActivity">
+        <activity android:name=".PhoneBookWithRecyclerViewActivity">
 
         </activity>
-        <activity android:name=".ListViewActivity"></activity>
+        <activity android:name=".RecyclerViewActivity"></activity>
+        <activity android:name=".ListViewActivity" />
         <activity android:name=".PhoneBookDetailActivity" />
         <activity android:name=".PhoneBookActivity" />
         <activity android:name=".AddViewActivity" />
