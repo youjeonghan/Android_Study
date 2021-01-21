@@ -1,11 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-
     // realm
     id 'kotlin-kapt'
     id 'realm-android'
-
+    // kotlinx.serialization
+//    id 'org.jetbrains.kotlin.multiplatform' version '1.4.21'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.4.21'
 }
 
 android {
@@ -43,27 +44,24 @@ android {
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // Glide 사용을 위한 추가
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     // ---------------------
-
     // recyclerview
     implementation "androidx.recyclerview:recyclerview:1.1.0"
-    // ---------------------
     // tablayout
-//    implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.google.android.material:material:1.2.1'
-    // ---------------------
     // 코루틴
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
-    // ---------------------
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2-native-mt'
+    // kotlinx.serialization
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
 }

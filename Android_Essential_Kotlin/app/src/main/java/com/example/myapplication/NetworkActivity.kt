@@ -7,6 +7,9 @@ import com.example.myapplication.databinding.ActivityNetworkBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
@@ -30,7 +33,7 @@ class NetworkActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.IO) {
             if (connection.responseCode == HttpsURLConnection.HTTP_OK) {
-                Log.d("conㅜ", "inputstream : " + connection.inputStream)
+                Log.d("conn", "inputstream : " + connection.inputStream)
                 // 버퍼란 묶음으로 읽는다는 뜻
                 // 오는 바이트를 UTF-8 방식으로읽고 빨리읽기위해 버퍼리더를 이용
                 val reader = BufferedReader(
@@ -45,9 +48,12 @@ class NetworkActivity : AppCompatActivity() {
             val temp = buffer.split(",")
             Log.d("conn", "bufferin : " + temp)
             Log.d("conn", "bufferin : " + temp[0])
+            Log.d("conn", "bufferin : " + temp[1])
+            Log.d("conn", "bufferin : " + temp[2])
+
+            val json = Json{ prettyPrint  = true }
+            val deptFromJson = json.decodeFromString<Array<PersonFromServer>>(buffer)
+            Log.d("conn Json -> Model", "" + deptFromJson[0].age)
         }
-
     }
-
-
 }

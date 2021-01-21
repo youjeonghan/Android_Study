@@ -1,11 +1,12 @@
 package com.example.myapplication
 
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
 
-class PersonFromServer(
+@Serializable
+data class PersonFromServer(
     var id: Int? = null,
     var name: String? = null,
     var age: Int? = null,
     var intro: String? = null
-) : Serializable
+)
