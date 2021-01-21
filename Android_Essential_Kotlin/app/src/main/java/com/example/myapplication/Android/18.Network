@@ -37,3 +37,12 @@ class Person(
 )
 
 Person(1,"김아무개",20,"안녕하세요")
+
+
+Request Type                        Status Code
+- GET       -> 정보 요청            -> 200 OK
+- POST      -> 정보 추가 요청       -> 201 Created
+- DELETE    -> 정보 삭제 요청
+- PUT       -> 정보 수정 요청
+
+StatusCode

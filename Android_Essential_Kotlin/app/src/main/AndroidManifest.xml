@@ -10,8 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyApplication">
-        <activity android:name=".AsyncActivity">
+        android:theme="@style/Theme.MyApplication"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".NetworkActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,10 +20,11 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".RealmActivity">
+        <activity android:name=".AsyncActivity">
 
         </activity>
-        <activity android:name=".SharedPreferenceActivity"></activity>
+        <activity android:name=".RealmActivity"></activity>
+        <activity android:name=".SharedPreferenceActivity" />
         <activity android:name=".TabPager2Activity" />
         <activity android:name=".TabPagerActivity" />
         <activity android:name=".PhoneBookWithRecyclerViewActivity" />

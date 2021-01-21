@@ -1,6 +1,6 @@
 package com.example.myapplication
 
-import android.os.AsyncTask
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ProgressBar
@@ -15,13 +15,4 @@ class AsyncActivity : AppCompatActivity() {
         setContentView(binding.root)
 
     }
-}
-
-class BackgroundAsyncTask(
-    val progressbar: ProgressBar,
-    val progressText: TextView
-) : AsyncTask<Int, Int, Int>() {
-    // parms -> doInBackground 에서 사용할 타입
-    // progress -> onProgressUpdate 에서 사용할 타입
-    // result -> onPostExcute 에서 사용할 타입
 }
