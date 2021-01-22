@@ -64,4 +64,6 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2-native-mt'
     // kotlinx.serialization
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 }
