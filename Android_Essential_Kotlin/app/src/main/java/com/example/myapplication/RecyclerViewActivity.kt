@@ -33,6 +33,7 @@ class RecyclerViewActivity : AppCompatActivity() {
     }
 }
 
+// PhoneBookWithRecyclerViewActivity 에서 바인딩 이용함
 class RecyclerViewAdapter(
     val itemList: ArrayList<CarForList>,
     val inflater: LayoutInflater

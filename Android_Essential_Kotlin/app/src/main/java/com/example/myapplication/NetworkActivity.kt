@@ -1,14 +1,18 @@
 package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ActivityNetworkBinding
+import com.example.myapplication.databinding.PersonListItemBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -31,29 +35,58 @@ class NetworkActivity : AppCompatActivity() {
 
         var buffer = ""
 
-        GlobalScope.launch(Dispatchers.IO) {
-            if (connection.responseCode == HttpsURLConnection.HTTP_OK) {
-                Log.d("conn", "inputstream : " + connection.inputStream)
-                // 버퍼란 묶음으로 읽는다는 뜻
-                // 오는 바이트를 UTF-8 방식으로읽고 빨리읽기위해 버퍼리더를 이용
-                val reader = BufferedReader(
-                    InputStreamReader(
-                        connection.inputStream,
-                        "UTF-8"
+        GlobalScope.launch(Dispatchers.Main) {
+            val deptFromJson = withContext(Dispatchers.IO) {
+                if (connection.responseCode == HttpsURLConnection.HTTP_OK) {
+                    // 버퍼란 묶음으로 읽는다는 뜻
+                    // 오는 바이트를 UTF-8 방식으로읽고 빨리읽기위해 버퍼리더를 이용
+                    val reader = BufferedReader(
+                        InputStreamReader(
+                            connection.inputStream,
+                            "UTF-8"
+                        )
                     )
-                )
-                buffer = reader.readLine()
-                Log.d("conn", "buffer : " + buffer)
+                    buffer = reader.readLine()
+                }
+                val json = Json { prettyPrint = true }
+                json.decodeFromString<Array<PersonFromServer>>(buffer)
             }
-            val temp = buffer.split(",")
-            Log.d("conn", "bufferin : " + temp)
-            Log.d("conn", "bufferin : " + temp[0])
-            Log.d("conn", "bufferin : " + temp[1])
-            Log.d("conn", "bufferin : " + temp[2])
-
-            val json = Json{ prettyPrint  = true }
-            val deptFromJson = json.decodeFromString<Array<PersonFromServer>>(buffer)
-            Log.d("conn Json -> Model", "" + deptFromJson[0].age)
+            with(binding.recyclerPerson) {
+                this.adapter = PersonAdapter(personList = deptFromJson)
+            }
         }
+    }
+}
+
+class PersonAdapter(
+    val personList: Array<PersonFromServer>
+) : RecyclerView.Adapter<PersonAdapter.ViewHolder>() {
+    inner class ViewHolder(itemView_binding: PersonListItemBinding) :
+        RecyclerView.ViewHolder(itemView_binding.root) {
+        val name: TextView
+        val age: TextView
+        val intro: TextView
+
+        init {
+            name = itemView_binding.personName
+            age = itemView_binding.personAge
+            intro = itemView_binding.personIntro
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.person_list_item, parent, false)
+        return ViewHolder(PersonListItemBinding.bind(view))
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.name.setText(personList.get(position).name)
+        holder.age.setText(personList.get(position).age.toString())
+        holder.intro.setText(personList.get(position).intro)
+    }
+
+    override fun getItemCount(): Int {
+        return personList.size
     }
 }
