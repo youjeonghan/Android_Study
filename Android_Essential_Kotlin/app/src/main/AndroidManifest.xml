@@ -13,17 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PermissionActivity">
+        <activity android:name=".EmailSignupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RetrofitActivity">
+        <activity android:name=".PermissionActivity">
 
         </activity>
-        <activity android:name=".NetworkActivity"></activity>
+        <activity android:name=".RetrofitActivity"></activity>
+        <activity android:name=".NetworkActivity" />
         <activity android:name=".AsyncActivity" />
         <activity android:name=".RealmActivity" />
         <activity android:name=".SharedPreferenceActivity" />
