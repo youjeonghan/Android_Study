@@ -17,6 +17,7 @@ class MasterApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        createRetrofit()
     }
 
 
@@ -29,7 +30,7 @@ class MasterApplication : Application() {
             if (checkIsLogin()) {
                 getUserToken()?.let { token ->
                     val request = original.newBuilder()
-                        .header("Authorization", token)
+                        .header("Authorization", "token " + token)
                         .build()
                     it.proceed(request)
                 }
