@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.app.Application
 import android.content.Context
+import com.facebook.stetho.Stetho
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -17,7 +18,9 @@ class MasterApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Stetho.initializeWithDefaults(this@MasterApplication)
         createRetrofit()
+        // chrome://inspect/#devices
     }
 
 
@@ -46,7 +49,7 @@ class MasterApplication : Application() {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://melowcode.org/")
+            .baseUrl("http://mellowcode.org/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
