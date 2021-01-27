@@ -1,9 +1,7 @@
 package com.example.myapplication
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface RetrofitService {
 
@@ -21,8 +19,21 @@ interface RetrofitService {
         @Body person: PersonFromServer
     ): Call<PersonFromServer>
 
+    // 객체를 보낼때는 @POST만 써도 되지만 필드를 보낼때는 @FormUrlEncoded 도 적어줘야한다
     @POST("user/signup/")
+    @FormUrlEncoded
     fun register(
-        @Body register: Register
+        // 서버에서 객체로 받을때
+//        @Body register: Register
+        @Field("username") username: String,
+        @Field("password1") password1: String,
+        @Field("password2") password2: String
+    ): Call<User>
+
+    @POST("user/login/")
+    @FormUrlEncoded
+    fun login(
+        @Field("username") username: String,
+        @Field("password") password: String
     ): Call<User>
 }

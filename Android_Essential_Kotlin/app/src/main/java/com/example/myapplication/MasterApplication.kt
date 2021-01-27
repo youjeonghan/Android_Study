@@ -28,10 +28,8 @@ class MasterApplication : Application() {
         // 원래 나갈려던걸 붙잡고(인터셉트) 헤더를 붙여서 다시 내보내는 것(프로시드 = 다시 진행행)
         val header = Interceptor {
             val original = it.request()
-
-
             if (checkIsLogin()) {
-                getUserToken()?.let { token ->
+                getUserToken().let { token ->
                     val request = original.newBuilder()
                         .header("Authorization", "token " + token)
                         .build()

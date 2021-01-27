@@ -2,8 +2,10 @@ package com.example.myapplication
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -17,15 +19,13 @@ class EmailSignupActivity : AppCompatActivity() {
     lateinit var usernameView: EditText
     lateinit var userPassword1View: EditText
     lateinit var userPassword2View: EditText
-    lateinit var registerBtn: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEmailSignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView()
-        setupListener()
-
+        setupListener(this@EmailSignupActivity)
     }
 
     fun saveUserToken(token: String, activity: Activity) {
@@ -41,19 +41,26 @@ class EmailSignupActivity : AppCompatActivity() {
         userPassword2View = binding.password2Inputbox
     }
 
-    fun setupListener() {
+    fun setupListener(activity: Activity) {
         binding.register.setOnClickListener {
             register(this@EmailSignupActivity)
         }
+        binding.login.setOnClickListener {
+            // intent 바로 안에서 만들고 시작하기
+            startActivity(
+                Intent(this@EmailSignupActivity, LoginActivity::class.java)
+            )
+        }
+
     }
 
     fun register(activity: Activity) {
-        val username = usernameView.text.toString()
-        val password1 = userPassword1View.text.toString()
-        val password2 = userPassword2View.text.toString()
-        val register = Register(username, password1, password2)
+        val username = getUserName()
+        val password1 = getUserPassword1()
+        val password2 = getUserPassword2()
 
-        (application as MasterApplication).service.register(register)
+        // enqueue로 callback을 넘겨받음
+        (application as MasterApplication).service.register(username, password1, password2)
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
@@ -61,6 +68,8 @@ class EmailSignupActivity : AppCompatActivity() {
                         val user = response.body()
                         val token = user!!.token!!
                         saveUserToken(token, activity)
+                        // 처음 가입시 sharedpreferences가 없었을거이기에 다시 호출하여 헤더에 토큰을 넣어줌
+                        (application as MasterApplication).createRetrofit()
                     }
                 }
 

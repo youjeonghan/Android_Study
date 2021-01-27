@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EmailSignupActivity">
+    tools:context=".LoginActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:textColorHint="#6E6A6A" />
 
         <EditText
-            android:id="@+id/password1_inputbox"
+            android:id="@+id/password_inputbox"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -49,17 +49,6 @@
             android:hint="비밀번호를 입력해주세요"
             android:textColorHint="#6E6A6A" />
 
-        <EditText
-            android:id="@+id/password2_inputbox"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:inputType="textPassword"
-            android:layout_marginBottom="6dp"
-            android:background="#ffffff"
-            android:gravity="center"
-            android:hint="비밀번호를 다시 입력해주세요"
-            android:textColorHint="#6E6A6A" />
 
 
     </LinearLayout>
