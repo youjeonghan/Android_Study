@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OutStargramPostListActivity"></activity>
+        <activity android:name=".OutStargramUploadActivity"></activity>
+        <activity android:name=".OutStargramMyPostListActivity" />
+        <activity android:name=".OutstargramUserinfo" />
+        <activity android:name=".OutStargramPostListActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".EmailSignupActivity">
             <intent-filter>

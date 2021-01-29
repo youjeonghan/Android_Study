@@ -1,11 +1,13 @@
 package com.example.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -18,8 +20,8 @@ import retrofit2.Response
 class OutStargramPostListActivity : AppCompatActivity() {
 
     lateinit var glide: RequestManager
-
     private lateinit var binding: ActivityOutStargramPostListBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOutStargramPostListBinding.inflate(layoutInflater)
@@ -35,7 +37,13 @@ class OutStargramPostListActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         val postList = response.body()
-                        val ada
+                        val adapter = PostAdapter(
+                            postList!!,
+                            glide
+                        )
+                        binding.postRecyclerview.adapter = adapter
+                        binding.postRecyclerview.layoutManager =
+                            LinearLayoutManager(this@OutStargramPostListActivity)
                     }
                 }
 
@@ -44,6 +52,32 @@ class OutStargramPostListActivity : AppCompatActivity() {
                 }
             }
         )
+
+        binding.allList.setOnClickListener { }
+        binding.userInfo.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@OutStargramPostListActivity,
+                    OutstargramUserinfo::class.java
+                )
+            )
+        }
+        binding.upload.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@OutStargramPostListActivity,
+                    OutStargramUploadActivity::class.java
+                )
+            )
+        }
+        binding.myList.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@OutStargramPostListActivity,
+                    OutStargramMyPostListActivity::class.java
+                )
+            )
+        }
     }
 }
 

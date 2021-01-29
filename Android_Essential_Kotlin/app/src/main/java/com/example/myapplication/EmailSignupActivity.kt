@@ -23,9 +23,20 @@ class EmailSignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEmailSignupBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        initView()
-        setupListener(this@EmailSignupActivity)
+
+        // 로그인이 되어있으면 바로 화면을 리스트로 옮기는 로직
+        if ((application as MasterApplication).checkIsLogin()) {
+            finish()
+            startActivity(
+                Intent(this@EmailSignupActivity, OutStargramPostListActivity::class.java)
+            )
+        } else {
+            setContentView(binding.root)
+            initView()
+            setupListener(this@EmailSignupActivity)
+        }
+
+
     }
 
     fun saveUserToken(token: String, activity: Activity) {
@@ -70,6 +81,9 @@ class EmailSignupActivity : AppCompatActivity() {
                         saveUserToken(token, activity)
                         // 처음 가입시 sharedpreferences가 없었을거이기에 다시 호출하여 헤더에 토큰을 넣어줌
                         (application as MasterApplication).createRetrofit()
+                        activity.startActivity(
+                            Intent(activity, OutStargramPostListActivity::class.java)
+                        )
                     }
                 }
 

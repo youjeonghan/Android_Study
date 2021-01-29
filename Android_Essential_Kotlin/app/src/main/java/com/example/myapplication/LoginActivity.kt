@@ -39,13 +39,16 @@ class LoginActivity : AppCompatActivity() {
                         saveUserToken(token, this@LoginActivity)
                         (application as MasterApplication).createRetrofit()
                         Toast.makeText(this@LoginActivity, "로그인 하셨습니다", Toast.LENGTH_LONG).show()
+                        startActivity(
+                            Intent(this@LoginActivity, OutStargramPostListActivity::class.java)
+                        )
                     }
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
-
                 }
             })
+
         }
     }
 
