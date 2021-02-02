@@ -16,22 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
+        <activity android:name=".MytubeDetailActivity"></activity>
         <activity android:name=".MyTubeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".OutStargramUploadActivity" />
         <activity android:name=".OutStargramMyPostListActivity" />
         <activity android:name=".OutstargramUserinfo" />
         <activity android:name=".OutStargramPostListActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".EmailSignupActivity">
-
-        </activity>
+        <activity android:name=".EmailSignupActivity"></activity>
         <activity android:name=".PermissionActivity" />
         <activity android:name=".RetrofitActivity" />
         <activity android:name=".NetworkActivity" />
