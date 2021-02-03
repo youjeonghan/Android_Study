@@ -21,7 +21,10 @@ import retrofit2.Response
 
 class MelonActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMelonBinding
+    var mediaPlayer: MediaPlayer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("life_cycle: ", "onCreate")
+        Log.d("mediaPlayer_cycle: ", "" + mediaPlayer)
         super.onCreate(savedInstanceState)
         binding = ActivityMelonBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -32,9 +35,45 @@ class MelonActivity : AppCompatActivity() {
                     call: Call<ArrayList<Song>>,
                     response: Response<ArrayList<Song>>
                 ) {
-
                     if (response.isSuccessful) {
                         Log.d("test", "ok")
+                        val songList = response.body()
+
+                        val adapter = MelonAdapter(
+                            songList!!,
+                            Glide.with(this@MelonActivity),
+                            this@MelonActivity
+                        )
+                        binding.songList.adapter = adapter
+                    }
+                }
+
+                override fun onFailure(call: Call<ArrayList<Song>>, t: Throwable) {
+                    Log.d("test", "fail")
+                }
+            }
+        )
+    }
+
+    override fun onPause() {
+        Log.d("life_cycle: ", "onPause")
+        super.onPause()
+        mediaPlayer?.pause()
+    }
+
+    override fun onResume() {
+        Log.d("life_cycle: ", "onResume")
+        super.onResume()
+        setContentView(binding.root)
+        (application as MasterApplication).service.getSongList().enqueue(
+            object : Callback<ArrayList<Song>> {
+                override fun onResponse(
+                    call: Call<ArrayList<Song>>,
+                    response: Response<ArrayList<Song>>
+                ) {
+
+                    if (response.isSuccessful) {
+                        Log.d("onResume", "ok")
                         val songList = response.body()
 
                         val adapter = MelonAdapter(
@@ -48,12 +87,11 @@ class MelonActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ArrayList<Song>>, t: Throwable) {
-                    Log.d("test", "fail")
+                    Log.d("onResume", "fail")
                 }
             }
         )
     }
-
 
     inner class MelonAdapter(
         var songList: ArrayList<Song>,
@@ -74,16 +112,23 @@ class MelonActivity : AppCompatActivity() {
                 itemViewBinding.songPlay.setOnClickListener {
                     val position: Int = adapterPosition
                     val path = songList.get(position).song
-                    val mediaPlayer = MediaPlayer.create(
-                        this@MelonActivity,
-                        Uri.parse(path)
-                    )
-                    mediaPlayer.start()
+                    try {
+                        mediaPlayer?.stop()
+                        mediaPlayer = null
+                        mediaPlayer = MediaPlayer.create(
+                            this@MelonActivity,
+                            Uri.parse(path)
+                        )
+                        mediaPlayer?.start()
+                    } catch (e: Exception) {
+
+                    }
 
                 }
 
             }
         }
+
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
